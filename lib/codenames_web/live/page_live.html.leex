@@ -1,0 +1,7 @@
+<div class="board">
+  <%= for {card, key} <- Enum.zip(@game_state.cards, @game_state.key) do %>
+  <div class="card <%= key %>">
+    <%= card %>
+  </div>
+  <% end %>
+</div>
