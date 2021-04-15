@@ -15,7 +15,8 @@ defmodule Codenames.Application do
       CodenamesWeb.Endpoint,
       # Start a worker by calling: Codenames.Worker.start_link(arg)
       # {Codenames.Worker, arg}
-      Codenames.GameState
+      Codenames.GameState,
+      Codenames.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

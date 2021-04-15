@@ -8,6 +8,7 @@ defmodule CodenamesWeb.Router do
     plug :put_root_layout, {CodenamesWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :set_name
   end
 
   pipeline :api do
@@ -38,6 +39,14 @@ defmodule CodenamesWeb.Router do
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: CodenamesWeb.Telemetry
+    end
+  end
+
+  defp set_name(conn, _opts) do
+    if !Plug.Conn.get_session(conn, :key) do
+      Plug.Conn.put_session(conn, :key, Base.encode64(:crypto.strong_rand_bytes(12)))
+    else
+      conn
     end
   end
 end

@@ -1,7 +1,19 @@
+Hello, <%= @name %>, you are <%= @role %> on the <%= @team %> team.
+
 <div class="board">
   <%= for {card, key} <- Enum.zip(@game_state.cards, @game_state.key) do %>
-  <div class="card <%= key %>">
+  <div class="card <%= if @role == :spymaster, do: key %>">
     <%= card %>
   </div>
   <% end %>
 </div>
+
+<%= if @game_state.clue do %>
+<%= @game_state.clue.word %>
+<% end %>
+
+<form phx-submit="set_clue">
+  <input name=clue value="">
+  <input type=number name=count value=0>
+  <input type=submit>
+</form>
